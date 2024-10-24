@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+    --light {
+        --bg: #fdfdfd;
+        --text: #6c7f93;
+        --active: #006aff;
+    }
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+[data-theme="light"] {
+    --bg: #fdfdfd;
+    --maintext: #000;
+    --softText: #6c7f93;
+    --active: #006aff;
+    --borderr: #d1d5db;
+    --bgsoft: #cccccc2a;
+    --smTitle: #000;
+    --tooltip: #f8f9fa;
+}
+[data-theme="dark"] {
+    --bg: #2a3447;
+    --maintext: #f9f5f5;
+    --softText: #c4d0e3;
+    --active: #006aff;
+    --borderr: #d1d5db46;
+    --bgsoft: #cccccc2a;
+    --smTitle: #c4d0e3a7;
+    --tooltip: #2a3447;
+}
+
+.pad {
+    padding: 0.6rem 1.2rem;
+}
+
+.gridLayout {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(180px, auto);
+    gap: 1rem;
+}
+
+.box {
+    padding: 15px;
+    border-radius: 20px;
+    border: 1px solid var(--borderr);
+}
