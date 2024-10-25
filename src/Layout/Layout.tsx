@@ -9,7 +9,7 @@ const Layout = () => {
     <div className='flex w-full font-text'>
       <Menu/>
       <div className='grow flex flex-col'>
-        <div className='sticky top-0 bg-bg'><Navbar/></div>
+        <div className='sticky top-0 bg-bg z-30'><Navbar/></div>
         <div className='grow'><Outlet/></div>
         <Footer/>
       </div>

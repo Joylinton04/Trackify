@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    overscroll-behavior: none;
+}
+
 
 :root {
     --light {
@@ -21,7 +25,7 @@ body {
 }
 
 [data-theme="light"] {
-    --bg: #fdfdfd;
+    --bg: #fbf9f9;
     --maintext: #000;
     --softText: #6c7f93;
     --active: #006aff;
@@ -29,16 +33,20 @@ body {
     --bgsoft: #cccccc2a;
     --smTitle: #000;
     --tooltip: #f8f9fa;
+    --bgdark: #022213;
+    --textB1: #f9f5f5;
 }
 [data-theme="dark"] {
     --bg: #2a3447;
     --maintext: #f9f5f5;
     --softText: #c4d0e3;
-    --active: #006aff;
+    --active: #11438a15;
     --borderr: #d1d5db46;
     --bgsoft: #cccccc2a;
     --smTitle: #c4d0e3a7;
     --tooltip: #2a3447;
+    --bgdark: #2a3447;
+    --textB1: #f9f5f5;
 }
 
 .pad {
@@ -56,4 +64,18 @@ body {
     padding: 15px;
     border-radius: 20px;
     border: 1px solid var(--borderr);
+}
+
+.expenseW {
+    height: 100%;
+    /* max-width: var(100vw - 240px); */
+}
+
+.menu {
+    background-color: var(--bgdark);
+}
+
+.active .icon {
+    color: #a9d432;
+    scale: 1.05;
 }

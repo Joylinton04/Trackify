@@ -1,18 +1,16 @@
-import { useContext } from "react";
-import { ThemeContext } from "../context/useContext";
-import { IconButton } from "@mui/material";
 import Header from "../component/Header";
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import LineChartC from "../component/LineChartC";
+import PieChartC from "../component/PieChartC";
+import { format } from 'date-fns'
 
 
 
 
 const Home = () => {
-  const {mode, toggleMode}  = useContext(ThemeContext)
-  const dateTime = new Date().toDateString()
+  const dateTime = format(new Date(), 'MMM dd, yyyy pp')
 
   const transactions = [
     {
@@ -64,11 +62,12 @@ const Home = () => {
       <div className="mt-6 gridLayout">
 
         {/* Box1 */}
-          <div className="box text-maintext flex flex-col justify-between">
-            <div className="flex justify-between items-center text-maintext">
+          <div className="box text-textB1 flex flex-col justify-between bg-bgdark">
+            <div className="flex justify-between items-center text-textB1">
               <h1 className="font-semibold text-lg">Balance</h1>
               <p className="text-xs bg-bgsoft rounded p-1">This Month</p>
             </div>
+            <div className="text-xs">{dateTime}</div>
             <div className="flex justify-between items-center gap-4">
               <h1 className="font-bold text-4xl">$16,000</h1>
               <TrendingUpIcon className="text-green-500"/>
@@ -117,7 +116,10 @@ const Home = () => {
           <div className="box text-maintext col-span-1 row-span-3">
               <div className="flex justify-between items-center border-b border-borderr pb-2">
                 <h1 className="font-medium  text-softText">Analytics</h1>
-                <p className="text-xs">Breakdown</p>
+                <p className="text-sm">Breakdown</p>
+              </div>
+              <div className="w-full pt-2 h-[300px]">
+                <PieChartC/>
               </div>
           </div>
 
@@ -146,17 +148,17 @@ const Home = () => {
           </div>
 
           {/* Box 6 */}
-          <div className="box text-maintext row-span-1 col-span-2 w-full">
+          <div className="box text-maintext row-span-2 col-span-2 w-full">
             <div className="flex justify-between items-center border-b border-borderr pb-2">
               <h1 className="font-medium  text-softText">This Month's Expenses</h1>
-              <p className="text-xs">Breakdown</p>
+              <p className="text-sm">Breakdown</p>
             </div>
             <div className="w-full pt-2">
-            <LineChartC/>
+              <LineChartC/>
             </div>
           </div>
 
-          <div className="box text-maintext row-span-1 col-span-1">Box 7</div>
+          {/* <div className="box text-maintext row-span-1 col-span-1">Box 7</div> */}
       </div>
 
     </div>  

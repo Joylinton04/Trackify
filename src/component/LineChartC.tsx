@@ -26,27 +26,27 @@ const LineChartC = () => {
     const data = [
     {
         name: 'Groceries',
-        amount: 327,
-        budget: 3000,
+        Amount: 327,
+        Budget: 3000,
     },
     {
         name: 'Transportation',
-        amount: 210,
-        budget: 900,
+        Amount: 210,
+        Budget: 900,
     },
     {
         name: 'Subscription',
-        amount: 401,
-        budget: 6900,
+        Amount: 401,
+        Budget: 6900,
     },
     {
         name: 'Vacation',
-        amount: 3801,
-        budget: 9200,
+        Amount: 3801,
+        Budget: 9200,
     },
 ];
   return (
-    <ResponsiveContainer width="100%" height={220}>
+    <ResponsiveContainer width="100%" height={300}>
         <LineChart data={data}>
           <XAxis 
             dataKey="name" 
@@ -72,8 +72,8 @@ const LineChartC = () => {
               backgroundColor: 'transparent'
             }}
           />
-          <Line type="monotone" dataKey="budget" stroke="#8884d8" activeDot={{ r: 8 }} />
-          <Line type="monotone" dataKey="amount" stroke="#82ca9d" />
+          <Line type="monotone" dataKey="Budget" stroke="#8884d8" activeDot={{ r: 8}}/>
+          <Line type="monotone" dataKey="Amount" stroke="#82ca9d" />
         </LineChart>
       </ResponsiveContainer>
   )

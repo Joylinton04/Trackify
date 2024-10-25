@@ -14,7 +14,9 @@ export default {
         active: 'var(--active)',
         borderr: 'var(--borderr)',
         bgsoft: 'var(--bgsoft)',
+        bgdark: 'var(--bgdark)',
         smTitle: 'var(--smTitle)',
+        textB1: 'var(--textB1)',
       },
       fontFamily: {
         header: 'Montserrat, sans-serif',
