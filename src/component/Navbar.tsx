@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <div className="flex justify-between items-center py-2 px-4 border-b border-borderr flex-[1]">
       
-      <div className="flex items-center text-maintext py-4"> 
+      <div className="flex items-center text-maintext py-4 ssm:py-0"> 
         <p className="font-semibold uppercase font-header">Admin</p>
         <p><KeyboardArrowDownIcon/></p>
       </div>
@@ -28,7 +28,7 @@ const Navbar = () => {
             <DarkModeIcon className="text-maintext"/>
           }
         </IconButton>
-        <div className="flex items-center justify-center gap-4 bg-bgsoft px-2 py-1 rounded">
+        <div className="flex items-center justify-center gap-4 bg-bgsoft px-2 py-1 rounded ssm:hidden">
           <div className="w-7 h-7 rounded-full">
             <PersonIcon className="text-maintext"/>
           </div>

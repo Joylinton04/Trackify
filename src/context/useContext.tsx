@@ -12,7 +12,7 @@ export const ThemeContext = createContext<themeSettings>({
 });
 
 const ThemeProvider = ({children}: PropsWithChildren) => {
-    const [mode, setMode]  = useState<string>(localStorage.getItem('theme') || 'dark');
+    const [mode, setMode]  = useState<string>(localStorage.getItem('theme') || 'light');
 
     const toggleMode = () => {
         const newMode = mode === 'light' ? 'dark' : 'light'

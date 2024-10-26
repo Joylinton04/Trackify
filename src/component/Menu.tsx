@@ -38,17 +38,17 @@ const Menu = () => {
   ];
 
   return (
-    <div className="w-[220px] border-r border-borderr pad h-screen sticky top-0 z-20 menu bg-bgdark">
+    <div className="w-[220px] border-r border-borderr pad h-screen sticky top-0 z-20 menu bg-bgdark lgg:w-max">
       <div className="h-full relative">
         <div className="py-2">
-          <div className="font-bold text-white text-3xl uppercase font-header">
+          <div className="font-bold text-white text-3xl uppercase font-header mdd:hidden">
             Trackify
           </div>
         </div>
         {/* Menu */}
         {menuData &&
           menuData.map((item) => (
-            <div className="flex flex-col mt-8" key={item.id}>
+            <div className="flex flex-col mt-8 mdd:-mt-2 ssm:-mt-4" key={item.id}>
               <div className="uppercase text-white py-2 text-sm font-header">
                 {item.title}
               </div>
@@ -59,7 +59,7 @@ const Menu = () => {
                   className="flex gap-1 py-4 px-2 hover:bg-bgsoft hover:scale-110 duration-300 rounded cursor-pointer items-center"
                 >
                   {option.icon}
-                  <p className="capitalize text-white">{option.title}</p>
+                  <p className="capitalize text-white mdd:hidden">{option.title}</p>
                 </NavLink>
               ))}
             </div>

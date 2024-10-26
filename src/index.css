@@ -79,3 +79,18 @@ body {
     color: #a9d432;
     scale: 1.05;
 }
+
+/* @media (max-width: 1024px) {
+    .gridLayout {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .box4 {
+        grid-row: span 2;
+    }
+    .box5 {
+        grid-column: span 2;
+    }
+    .box6 {
+        grid-column: span 3;
+    }
+} */

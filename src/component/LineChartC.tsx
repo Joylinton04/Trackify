@@ -46,7 +46,7 @@ const LineChartC = () => {
     },
 ];
   return (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer width="100%" height={300} className={'relative ssm:-left-6 ssm:w-[350px]'}>
         <LineChart data={data}>
           <XAxis 
             dataKey="name" 

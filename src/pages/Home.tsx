@@ -53,16 +53,16 @@ const Home = () => {
 
   return (
     <div className="pad">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center ssm:flex-wrap ssm:gap-3">
         <Header title="Dashboard" text="A convienent way to manage or track your expenses"/>
         <div className="text-maintext">calender</div>
       </div>
 
       {/* grid layout*/}
-      <div className="mt-6 gridLayout">
+      <div className="mt-6 gridLayout lgg:grid-cols-3 mdd:grid-cols-2 ssm:grid-cols-1 ssm:gap-2">
 
         {/* Box1 */}
-          <div className="box text-textB1 flex flex-col justify-between bg-bgdark">
+          <div className="box box1 text-textB1 flex flex-col justify-between bg-bgdark">
             <div className="flex justify-between items-center text-textB1">
               <h1 className="font-semibold text-lg">Balance</h1>
               <p className="text-xs bg-bgsoft rounded p-1">This Month</p>
@@ -75,7 +75,7 @@ const Home = () => {
           </div>
 
           {/* Box2 */}
-          <div className="box text-maintext flex flex-col gap-7">
+          <div className="box box2 text-maintext flex flex-col gap-7 mdd:hidden">
             <div className="flex justify-between items-center">
               <h1 className="font-medium ">Net Income</h1>
               <MoreHorizIcon/>
@@ -94,7 +94,7 @@ const Home = () => {
           </div>
 
           {/* Box 3 */}
-          <div className="box text-maintext flex flex-col gap-7">
+          <div className="box box3 text-maintext flex flex-col gap-7">
               <div className="flex justify-between items-center">
                 <h1 className="font-medium ">Net Expense</h1>
                 <MoreHorizIcon/>
@@ -111,20 +111,20 @@ const Home = () => {
                 </div>
               </div>
           </div>
-
+        {/*  */}
           {/* Box 4 */}
-          <div className="box text-maintext col-span-1 row-span-3">
+          <div className="box box4 text-maintext col-span-1 row-span-3 lgg:row-span-2 mdd:col-span-3 ssm:col-span-1 ssm:row-[5]">
               <div className="flex justify-between items-center border-b border-borderr pb-2">
                 <h1 className="font-medium  text-softText">Analytics</h1>
                 <p className="text-sm">Breakdown</p>
               </div>
-              <div className="w-full pt-2 h-[300px]">
+              <div className="w-full pt-2 h-[360px]">
                 <PieChartC/>
               </div>
           </div>
 
           {/* Box 5 */}
-          <div className="box text-maintext col-span-1 row-span-2 overflow-auto">
+          <div className="box box5 text-maintext col-span-1 row-span-2 overflow-auto lgg:col-span-2 mdd:row-[2] ssm:col-span-1 ssm:row-[3]">
               <div className="flex justify-between items-center border-b border-borderr pb-2">
                 <h1 className="font-medium  text-softText">Last Transaction</h1>
                 <p className="text-xs">This Month</p>
@@ -135,11 +135,11 @@ const Home = () => {
                   <div className="flex gap-2 items-center">
                       <div className="w-8 h-8 bg-bgsoft rounded-full grid place-content-center text-xs uppercase">{transaction.purpose.charAt(0)}</div>
                       <div className="flex flex-col">
-                        <p className=" font-semibold">{transaction.purpose}</p>
-                        <p className="text-softText text-xs">{dateTime}</p>
+                        <p className=" font-semibold ssm:text-sm">{transaction.purpose}</p>
+                        <p className="text-softText text-xs ssm:text-[10px]">{dateTime}</p>
                       </div>
                   </div>
-                  <div className={`font-medium  ${transaction.amount < 0 ? 'text-red-500' : 'text-green-500'}`}>
+                  <div className={`font-medium  ${transaction.amount < 0 ? 'text-red-500' : 'text-green-500'} ssm:text-sm`}>
                     ${(transaction.amount).toFixed(2)}
                   </div>
                 </div>
@@ -148,12 +148,12 @@ const Home = () => {
           </div>
 
           {/* Box 6 */}
-          <div className="box text-maintext row-span-2 col-span-2 w-full">
-            <div className="flex justify-between items-center border-b border-borderr pb-2">
+          <div className="box box6 text-maintext row-span-2 col-span-2 w-full lgg:col-span-3 mdd:col-span-2 mdd: ssm:col-span-1 ssm:row-[4]">
+            <div className="flex justify-between items-center border-b border-borderr pb-2 gap-2">
               <h1 className="font-medium  text-softText">This Month's Expenses</h1>
               <p className="text-sm">Breakdown</p>
             </div>
-            <div className="w-full pt-2">
+            <div className="w-full pt-2 relative">
               <LineChartC/>
             </div>
           </div>
