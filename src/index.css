@@ -80,17 +80,8 @@ body {
     scale: 1.05;
 }
 
-/* @media (max-width: 1024px) {
-    .gridLayout {
-        grid-template-columns: repeat(3, 1fr);
+@media (min-width:640px) {
+    .mobilemenu {
+        display: none;
     }
-    .box4 {
-        grid-row: span 2;
-    }
-    .box5 {
-        grid-column: span 2;
-    }
-    .box6 {
-        grid-column: span 3;
-    }
-} */
+}

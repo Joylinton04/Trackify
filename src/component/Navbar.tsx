@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <div className="flex justify-between items-center py-2 px-4 border-b border-borderr flex-[1]">
       
-      <div className="flex items-center text-maintext py-4 ssm:py-0"> 
+      <div className="flex items-center text-maintext py-4"> 
         <p className="font-semibold uppercase font-header">Admin</p>
         <p><KeyboardArrowDownIcon/></p>
       </div>

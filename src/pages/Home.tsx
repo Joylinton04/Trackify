@@ -43,19 +43,13 @@ const Home = () => {
       date: dateTime,
       amount: -10,
     },
-    {
-      id: 6,
-      purpose: 'Stream',
-      date: dateTime,
-      amount: 500,
-    },
   ]
 
   return (
     <div className="pad">
       <div className="flex justify-between items-center ssm:flex-wrap ssm:gap-3">
         <Header title="Dashboard" text="A convienent way to manage or track your expenses"/>
-        <div className="text-maintext">calender</div>
+        {/* <div className="text-maintext">calender</div> */}
       </div>
 
       {/* grid layout*/}

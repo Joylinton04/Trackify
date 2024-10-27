@@ -4,10 +4,14 @@ import { PieChart, Pie, Cell, ResponsiveContainer, PieLabelRenderProps } from 'r
 
 const PieChartC = () => {
     const [value, setValue] = useState<number>(100)
+    const [MaxRadius, setMaxRadius] = useState<number>(120)
 
     useEffect(() => {
         if(window.innerWidth <= 1024) {
             setValue(60)
+        }
+        if(window.innerWidth <= 630) {
+            setMaxRadius(100)
         }
     },[])
 
@@ -52,7 +56,7 @@ const PieChartC = () => {
                 labelLine={false}
                 label={renderCustomizedLabel}
                 // outerRadius={110}
-                maxRadius={120}
+                maxRadius={MaxRadius}
                 fill="#8884d8"
                 dataKey="value"
                 >
