@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
 import Layout from "../Layout/Layout";
 import Expenses from "../pages/Expenses";
+import Budget from "../pages/Budget";
 
 
 const router = createBrowserRouter([
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
             {
                 path: "expenses",
                 element: <Expenses/>
+            },
+            {
+                path: "budget",
+                element: <Budget/>
             }
         ]
     }

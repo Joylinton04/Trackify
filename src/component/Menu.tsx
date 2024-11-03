@@ -52,6 +52,17 @@ const Menu = () => {
       options: [
         {
           id: 2,
+          title: "Budget",
+          icon: (
+            <BarChartIcon
+              className="icon text-[#f5f5f5]"
+              sx={{ fontSize: "30px" }}
+            />
+          ),
+          path: "/budget",
+        },
+        {
+          id: 3,
           title: "Expenses",
           icon: (
             <BarChartIcon
@@ -89,7 +100,7 @@ const Menu = () => {
                   <NavLink
                     key={option.id}
                     to={option.path}
-                    className="flex gap-1 py-4 px-2 hover:bg-bgsoft hover:scale-110 duration-300 rounded cursor-pointer items-center"
+                    className="flex gap-1 py-4 px-2 hover:bg-bgsoft hover:scale-105 duration-300 rounded cursor-pointer items-center"
                   >
                     {option.icon}
                     <p className="capitalize text-white mdd:hidden">

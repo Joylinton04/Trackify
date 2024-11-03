@@ -1,10 +1,31 @@
 import { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, PieLabelRenderProps } from 'recharts';
+import { useAppSelector } from '../redux/store';
+
+interface expense {
+  id: string;
+  id_: number;
+  budget_id: string;
+  budget: number;
+  purpose: string;
+  date: string;
+  amount: number;
+}
+
+interface Expenses {
+    expenses: expense[]
+}
 
 
-const PieChartC = () => {
+const PieChartC = ({expenses}:Expenses) => {
     const [value, setValue] = useState<number>(100)
     const [MaxRadius, setMaxRadius] = useState<number>(120)
+    const selectedData =  expenses
+    .filter(e => e.date) // Ensure valid dates
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 4) || [];
+    console.log(selectedData)
+
 
     useEffect(() => {
         if(window.innerWidth <= 1024) {
@@ -13,14 +34,7 @@ const PieChartC = () => {
         if(window.innerWidth <= 630) {
             setMaxRadius(100)
         }
-    },[])
-
-    const data = [
-        { name: 'Transportation', value: 430 },
-        { name: 'Vacation', value: 1000 },
-        { name: 'Stream', value: 550 },
-        { name: 'Groceries', value: 300 },
-    ];
+    },[window.innerWidth])
     
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
     
@@ -50,7 +64,7 @@ const PieChartC = () => {
             <ResponsiveContainer height={`${value}%`}>
             <PieChart>
                 <Pie
-                data={data}
+                data={selectedData}
                 cx="50%"
                 cy="50%"
                 labelLine={false}
@@ -58,22 +72,22 @@ const PieChartC = () => {
                 // outerRadius={110}
                 maxRadius={MaxRadius}
                 fill="#8884d8"
-                dataKey="value"
+                dataKey="amount"
                 >
-                {data.map((entry, index) => (
+                {selectedData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} fontSize="0.75rem"/>
                 ))}
                 </Pie>
             </PieChart>
             </ResponsiveContainer>
             <ul className='text-softText flex flex-wrap gap-2'>
-                {data.map((entry, index) => (
+                {selectedData.map((entry, index) => (
                 <li className='flex flex-col gap-2 grow' key={index}>
                     <div className='flex items-center gap-2'>
                         <span className={`w-3 h-3 rounded-full`} style={{ backgroundColor: COLORS[index % COLORS.length]}}></span>
-                        <span className='lgg:text-sm'>{entry.name}</span>
+                        <span className='lgg:text-sm'>{entry.purpose}</span>
                     </div>
-                    <div className='pl-5 lgg:text-xs'>${entry.value}</div>
+                    <div className='pl-5 lgg:text-xs'>${entry.amount}</div>
                 </li>
                 ))}
             </ul>

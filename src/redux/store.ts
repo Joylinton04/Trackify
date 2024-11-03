@@ -1,5 +1,7 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { configureStore } from '@reduxjs/toolkit'
+import { expenseSlice } from "./ExpenseSlice";
+import { budgetSlice } from "./BudgetSlice";
 
 
 
@@ -8,11 +10,10 @@ import { configureStore } from '@reduxjs/toolkit'
 
 export const store = configureStore({
   reducer: {
-    
+    expenses:expenseSlice.reducer,
+    budgets: budgetSlice.reducer
   },
 })
-
-
 
 
 
