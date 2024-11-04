@@ -1,8 +1,11 @@
 import { useState } from "react";
 import Header from "../component/Header";
-import { useAppSelector } from "../redux/store";
+import { useAppDispatch, useAppSelector } from "../redux/store";
 import AddIcon from "@mui/icons-material/Add";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { deleteBudget, addBudget as addNewBudget } from "../redux/BudgetSlice";
+import { Link } from "react-router-dom";
 
 interface BudgetForm {
   purpose: string;
@@ -15,6 +18,7 @@ const Budget = () => {
   const reversedBudgets = [...budgets].reverse();
   const [addBudget, setAddBudget] = useState<boolean>(false);
   const [formData, setFormData] = useState<BudgetForm>({ purpose: '', budget: 0 });
+  const dispatch = useAppDispatch()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -26,13 +30,21 @@ const Budget = () => {
 
   const handleAddBudget = () => {
     setAddBudget((prev) => !prev);
+
+  };
+
+  const handleDeleteBudget = (budget_id: string) => {
+   dispatch(deleteBudget({id: budget_id}))
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Implement dispatch or any functionality to handle the form data
-    handleAddBudget();
+    
+    dispatch(addNewBudget({budget: formData.budget, purpose: formData.purpose}));
     setFormData({ purpose: '', budget: 0 });
+    setTimeout(() => {
+      handleAddBudget();
+    },200)
   };
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
@@ -63,9 +75,14 @@ const Budget = () => {
                     <h1 className="text-maintext text-4xl font-bold">${(budget.budget).toLocaleString()}</h1>
                     <p className="text-maintext">{budget.purpose}</p>
                   </div>
-                  <div></div>
+                  <IconButton
+                  onClick={() => handleDeleteBudget(budget.budget_id)}>
+                    <DeleteIcon 
+                      className="text-red-500"
+                    />
+                  </IconButton>
                 </div>
-                <div className="flex flex-col gap-2">
+                <Link className="flex flex-col gap-2" to={`/expenses/${budget.budget_id}`}>
                   <div className="w-full">
                     <div
                       className="w-[60%] rounded h-2 duration-200"
@@ -73,8 +90,8 @@ const Budget = () => {
                     ></div>
                   </div>
                   <p style={{ color: COLORS[1] }}>60%</p>
-                </div>
-                <div className="flex flex-col gap-4">
+                </Link>
+                <Link className="flex flex-col gap-4" to={`/expenses/${budget.budget_id}`}>
                   <div className="flex justify-between gap-2">
                     <p className="text-softText">Net Expense</p>
                     <h1 className="text-red-500 font-bold">${(totalExpenses).toLocaleString()}</h1>
@@ -83,7 +100,7 @@ const Budget = () => {
                     <p className="text-softText">Balance</p>
                     <h1 className="text-maintext font-bold">${(balance).toLocaleString()}</h1>
                   </div>
-                </div>
+                </Link>
               </div>
             </div>
           </div>

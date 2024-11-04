@@ -105,9 +105,14 @@ const Home = () => {
             <h1 className="font-medium  text-softText">Analytics</h1>
             <p className="text-sm">Breakdown</p>
           </div>
+          {filteredExpenses.length > 0 ?
           <div className="w-full pt-2 h-[360px]">
             <PieChartC expenses={filteredExpenses} />
           </div>
+          :<div className="grid place-content-center">
+              <p className="text-red-500 font-semibold">No expenses to display</p>
+          </div>
+          }
         </div>
 
         {/* Box 5 */}
@@ -121,7 +126,9 @@ const Home = () => {
               View all
             </Link>
           </div>
-          <div className="flex flex-col mt-4 gap-5">
+          {
+            filteredExpenses.length > 0 ?
+            <div className="flex flex-col mt-4 gap-5">
             {filteredExpenses &&
               filteredExpenses.map((expense) => (
                 <div
@@ -147,6 +154,10 @@ const Home = () => {
                 </div>
               ))}
           </div>
+          : <div className="grid place-content-center">
+              <p className="text-red-500 font-semibold">No expenses to display</p>
+          </div>
+          }
         </div>
 
         {/* Box 6 */}

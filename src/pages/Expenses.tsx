@@ -2,18 +2,33 @@ import { Button } from "@mui/material";
 import GridTable from "../component/GridTable";
 import Header from "../component/Header";
 import { useState } from "react";
-import { useAppDispatch } from "../redux/store";
+import { useAppDispatch, useAppSelector } from "../redux/store";
 import { addExpenses } from "../redux/ExpenseSlice";
+import { useParams } from "react-router-dom";
 
 interface ExpenseForm {
   purpose: string;
   amount: number;
-  budget: number;
+}
+
+interface expenses {
+  id: string;
+  id_: number;
+  budget_id: string;
+  purpose: string;
+  amount: number;
+  date: string;
 }
 
 const Expenses = () => {
+  const id = useParams<{ id: string }>();
   const [addExpense, setAddExpense] = useState<boolean>(false);
-  const [formData, setFormData] = useState<ExpenseForm>({ purpose: '', amount: 0, budget: 0 });
+  const [formData, setFormData] = useState<ExpenseForm>({ purpose: '', amount: 0,});
+  // const [exp, setExp] = useState<expenses>()
+  const expenses = useAppSelector(state => state.expenses);
+
+  const filteredExpenses = typeof id?.id === 'string' ? expenses.filter((exp) => exp.budget_id === id.id) : [];
+
   const dispatch = useAppDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,6 +38,7 @@ const Expenses = () => {
       [name]: name === "amount" ? parseFloat(value) : value, // Ensure amount is treated as a number
     });
   };
+  
 
   const handleAddExpense = () => {
     setAddExpense(prev => !prev);
@@ -30,9 +46,9 @@ const Expenses = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(addExpenses({purpose: formData.purpose, amount: formData.amount, budget: 12000}));
+    dispatch(addExpenses({purpose: formData.purpose, amount: formData.amount, id: id?.id}));
     handleAddExpense()
-    setFormData({ purpose: '', amount: 0 , budget: 0});
+    setFormData({ purpose: '', amount: 0,});
   };
 
   return (
@@ -49,7 +65,7 @@ const Expenses = () => {
           Add New Expense
         </button>
       </div>
-      <GridTable />
+      <GridTable filteredExpenses={filteredExpenses} />
       {/* Overflow add expense */}
       {addExpense && (
         <div className="fixed top-0 left-0 z-50 w-full h-full bg-[#21212190]">

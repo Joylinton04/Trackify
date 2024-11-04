@@ -2,11 +2,24 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid';
 import { useAppSelector } from '../redux/store';
 
-const GridTable = () => {
+interface ExpenseData {
+  id: string;
+  id_: number;
+  budget_id: string | null;
+  purpose: string;
+  amount: number;
+  date: string;
+}
+
+interface GridTableProps {
+  filteredExpenses: ExpenseData[];
+}
+
+const GridTable = ({ filteredExpenses }: GridTableProps) => {
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
   const expenses = useAppSelector(state => state.expenses);
 
-  const columns: GridColDef<(typeof expenses)[number]>[] = [
+  const columns: GridColDef<(typeof filteredExpenses)[number]>[] = [
     { field: 'id_', headerName: 'ID', width: 90 },
     {
       field: '',
@@ -85,7 +98,7 @@ const GridTable = () => {
       }}
     >
       <DataGrid
-        rows={[...expenses]
+        rows={[...filteredExpenses]
           .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())} // Sort by date
         columns={columns}
         slots={{ toolbar: GridToolbar }}

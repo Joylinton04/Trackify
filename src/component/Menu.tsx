@@ -10,7 +10,7 @@ const Menu = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
 
   useEffect(() => {
-    if (scrollY >= 60) {
+    if (scrollY >= 40) {
       setShowMenu(true); // Hide bottom menu when scrolled more than 60px
     } else {
       setShowMenu(false); // Show bottom menu when less than 60px
@@ -42,7 +42,7 @@ const Menu = () => {
               sx={{ fontSize: "30px" }}
             />
           ),
-          path: "/profile",
+          path: "/",
         },
       ],
     },
@@ -61,7 +61,7 @@ const Menu = () => {
           ),
           path: "/budget",
         },
-        {
+        /* {
           id: 3,
           title: "Expenses",
           icon: (
@@ -71,7 +71,7 @@ const Menu = () => {
             />
           ),
           path: "/expenses",
-        },
+        }, */
       ],
     },
   ];
@@ -117,7 +117,7 @@ const Menu = () => {
       <div
         className={`mobilemenu bg-[#000] ssm:fixed bottom-0 left-0 w-full h-max z-50 ${
           showMenu ? "opacity-0" : "opacity-100"
-        } duration-700`}
+        } duration-500`}
       >
         <div className="flex gap-4 w-full justify-center">
           {menuData &&

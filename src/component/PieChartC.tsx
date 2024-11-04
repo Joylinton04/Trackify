@@ -5,8 +5,7 @@ import { useAppSelector } from '../redux/store';
 interface expense {
   id: string;
   id_: number;
-  budget_id: string;
-  budget: number;
+  budget_id: string | null;
   purpose: string;
   date: string;
   amount: number;

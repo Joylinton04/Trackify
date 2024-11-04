@@ -12,6 +12,13 @@ const initialState: budget[] = [
      budget: 12000,
      purpose: 'A budget for Groceries',
      date: dateTime,
+   },
+   {
+     id: uuidv4(),
+     budget_id: uuidv4(),
+     budget: 35000,
+     purpose: 'A budget for Vacation',
+     date: dateTime,
    }
 ]
 
@@ -29,12 +36,12 @@ export const budgetSlice = createSlice({
             date: dateTime,
           });
       },
-      deleteBudget(state, action:PayloadAction<{id:string}> ) {
-       state.filter(state => state.id !== action.payload.id)
-      },
+      deleteBudget(state, action: PayloadAction<{ id: string }>) {
+        return state.filter(state => state.budget_id !== action.payload.id)
+      }      
     },
 })
 
 
-export const {addBudget} = budgetSlice.actions;
+export const {addBudget,deleteBudget} = budgetSlice.actions;
 export default budgetSlice.reducer

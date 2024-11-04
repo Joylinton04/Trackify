@@ -1,14 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { format } from 'date-fns';
 import { v4 as uuid } from 'uuid';
-import { id } from "./data";
+import { id as idd } from "./data";
 
 // Define the structure of an expense object
 interface Expense {
   id: string;
   id_: number;
-  budget_id: string;
-  budget: number;
+  budget_id: string | null;
   purpose: string;
   date: string;
   amount: number;
@@ -19,8 +18,7 @@ const initialState: Expense[] = [
   {
     id: uuid(),
     id_: 1,
-    budget_id: id,
-    budget: 120000,
+    budget_id: idd,
     purpose: 'Groceries',
     date: format(new Date(), 'MMM dd, yyyy pp'),
     amount: 280,
@@ -28,8 +26,7 @@ const initialState: Expense[] = [
   {
     id: uuid(),
     id_: 2,
-    budget_id: id,
-    budget: 120000,
+    budget_id: idd,
     purpose: 'PS5',
     date: format(new Date(), 'MMM dd, yyyy pp'),
     amount: 599,
@@ -37,8 +34,7 @@ const initialState: Expense[] = [
   {
     id: uuid(),
     id_: 3,
-    budget_id: id,
-    budget: 120000,
+    budget_id: idd,
     purpose: 'Netflix',
     date: format(new Date(), 'MMM dd, yyyy pp'),
     amount: 120,
@@ -46,8 +42,7 @@ const initialState: Expense[] = [
   {
     id: uuid(),
     id_: 4,
-    budget_id: id,
-    budget: 120000,
+    budget_id: idd,
     purpose: 'Spotify',
     date: format(new Date(), 'MMM dd, yyyy pp'),
     amount: 50,
@@ -55,8 +50,7 @@ const initialState: Expense[] = [
   {
     id: uuid(),
     id_: 5,
-    budget_id: id,
-    budget: 120000,
+    budget_id: idd,
     purpose: 'Transportation',
     date: format(new Date(), 'MMM dd, yyyy pp'),
     amount: 80,
@@ -69,15 +63,15 @@ export const expenseSlice = createSlice({
   initialState,
   reducers: {
     // Add a new expense
-    addExpenses(state, action: PayloadAction<{ purpose: string; amount: number; budget: number }>) {
-      const { purpose, amount, budget } = action.payload;
+    addExpenses(state, action: PayloadAction<{ purpose: string; amount: number; id: string | undefined }>) {
+      const { purpose, amount, id } = action.payload;
       const id_ = state.length ? state[state.length - 1].id_ + 1 : 1;
-      const dateTime = format(new Date(), 'MMM dd, yyyy pp'); // Generate the current date
+      const dateTime = format(new Date(), 'MMM dd, yyyy pp'); // Current date and time
+  
       state.push({
         id: uuid(),
         id_: id_,
-        budget_id: id,
-        budget,
+        budget_id: id ?? null,  // Default to `null` if no budget ID is provided
         purpose,
         date: dateTime,
         amount,
@@ -85,12 +79,9 @@ export const expenseSlice = createSlice({
     },
 
     // Delete an expense
-    deleteExpense(state, action: PayloadAction<string>) {
-      const index = state.findIndex((expense) => expense.id === action.payload);
-      if (index >= 0) {
-        state.splice(index, 1);
-      }
-    },
+    deleteExpense(state, action: PayloadAction<{ id: string }>) {
+      return state.filter(state => state.budget_id !== action.payload.id)
+    }  
   },
 });
 
