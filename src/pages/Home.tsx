@@ -44,7 +44,10 @@ const Home = () => {
       {/* grid layout*/}
       <div className="mt-6 gridLayout lgg:grid-cols-3 mdd:grid-cols-2 ssm:grid-cols-1 ssm:gap-2">
         {/* Box1 */}
-        <div className="box box1 text-textB1 flex flex-col justify-between bg-bgdark">
+        {
+          latestBudget ? 
+        <>
+          <div className="box box1 text-textB1 flex flex-col justify-between bg-bgdark">
           <div className="flex justify-between items-center text-textB1">
             <h1 className="font-semibold text-lg">Budget</h1>
             <p className="text-xs bg-bgsoft rounded p-1">New</p>
@@ -172,6 +175,9 @@ const Home = () => {
             <LineChartC />
           </div>
         </div>
+        </>
+        : <p>Add a budget to display</p>
+        }
 
         {/* <div className="box text-maintext row-span-1 col-span-1">Box 7</div> */}
       </div>
