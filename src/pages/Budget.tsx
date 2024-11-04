@@ -47,7 +47,7 @@ const Budget = () => {
     },200)
   };
 
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#ff0000"];
 
   return (
     <div className="pad">
@@ -65,6 +65,7 @@ const Budget = () => {
       {reversedBudgets.map((budget) => {
         const filteredExpenses = expenses.filter((exp) => exp.budget_id === budget.budget_id);
         const totalExpenses = filteredExpenses.reduce((acc, exp) => acc + exp.amount, 0);
+        const percentageWidth = (budget.budget > 0 ? (totalExpenses / budget.budget) * 100 : 0);
         const balance = budget.budget - totalExpenses;
         return (
           <div key={budget.budget_id} className="mt-6 flex flex-col gap-4">
@@ -85,11 +86,12 @@ const Budget = () => {
                 <Link className="flex flex-col gap-2" to={`/expenses/${budget.budget_id}`}>
                   <div className="w-full">
                     <div
-                      className="w-[60%] rounded h-2 duration-200"
-                      style={{ backgroundColor: COLORS[1] }}
-                    ></div>
+                      className="rounded h-2 duration-200"
+                      style={{
+                        width: `${percentageWidth}%`,
+                        backgroundColor: percentageWidth < 20 ? COLORS[0] : percentageWidth < 60 ? 'rgb(30 64 175)' : 'green'}}></div>
                   </div>
-                  <p style={{ color: COLORS[1] }}>60%</p>
+                  <p className="text-maintext">{(Math.floor(percentageWidth))}%</p>
                 </Link>
                 <Link className="flex flex-col gap-4" to={`/expenses/${budget.budget_id}`}>
                   <div className="flex justify-between gap-2">

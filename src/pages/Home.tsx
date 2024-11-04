@@ -12,27 +12,34 @@ const Home = () => {
   const dateTime = format(new Date(), "MMM dd, yyyy pp");
   const budget = useAppSelector((state) => state.budgets);
   const expenses = useAppSelector((state) => state.expenses);
+
   const latestBudget =
     [...budget].sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-    )[0] || [];
+    )[0] || null;
 
   const filteredExpenses =
-    [...expenses]
-      .filter((exp) => exp.budget_id === latestBudget.budget_id)
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-      .slice(0, 5) || [];
+    latestBudget
+      ? [...expenses]
+          .filter((exp) => exp.budget_id === latestBudget.budget_id)
+          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+          .slice(0, 5)
+      : [];
 
   const totalExpenses = filteredExpenses.reduce(
     (acc, exp) => acc + exp.amount,
     0
   );
-  const totalRemainingBudget = latestBudget.budget - totalExpenses;
+
+  const totalRemainingBudget = latestBudget
+    ? latestBudget.budget - totalExpenses
+    : 0;
+
   const remainingBudgetColor =
     totalRemainingBudget < 0 ? "text-red-500" : "text-green-500";
 
   return (
-    <div className="pad">
+    <div className="pad relative">
       <div className="flex justify-between items-center ssm:flex-wrap ssm:gap-3">
         <Header
           title="Dashboard"
@@ -55,7 +62,7 @@ const Home = () => {
           <div className="text-xs">{latestBudget.date}</div>
           <div className="flex justify-between items-center gap-4">
             <h1 className="font-bold text-4xl">
-              ${latestBudget.budget.toLocaleString()}
+              ${latestBudget.budget?.toLocaleString() || "0"}
             </h1>
             <TrendingUpIcon className="text-green-500" />
           </div>
@@ -176,7 +183,7 @@ const Home = () => {
           </div>
         </div>
         </>
-        : <p>Add a budget to display</p>
+        : <p className="absolute right-1/2 font-semibold text-lg">Add a budget to display</p>
         }
 
         {/* <div className="box text-maintext row-span-1 col-span-1">Box 7</div> */}
